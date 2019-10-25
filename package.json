@@ -1,0 +1,33 @@
+{
+  "name": "cs4500-drone-app",
+  "version": "0.0.1",
+  "description": "Educational K-8 game that simulates a drone with a camera",
+  "main": "./dist/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./dist/server.js",
+    "dev": "nodemon --exec babel-node ./src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/traipsinglutrinae/4500-001_Adjuvant.git"
+  },
+  "author": "James Harter",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/traipsinglutrinae/4500-001_Adjuvant/issues"
+  },
+  "homepage": "https://github.com/traipsinglutrinae/4500-001_Adjuvant#readme",
+  "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/node": "^7.6.3",
+    "@babel/preset-env": "^7.6.3",
+    "nodemon": "^1.19.4"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "engines": {
+    "node": "=v12.13.0"
+  }
+}
