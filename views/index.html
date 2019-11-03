@@ -7,18 +7,32 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="mapzoom.js"></script>
+  <style>
+    .responsive {
+      width: 100%;
+      height: auto;
+    }
+</style>
 </head>
 <body>
-  
-<div class="container">
-    <div id="slideer" class="row">
-        <div class="col-1">
-          slider
+  <div class="container-fluid" style="background-color:#343a40;">
+    <div class="status" id="status">
+  			<div class="col-sm-1" style="background-color:#20c997;">Map Status: </div>
+  			<div class="col-sm-11" style="background-color:#17a2b8;">0/3 Map Active!</div>
+    </div>
+  </div>
+  <div class="container-fluid" style="background-color:#343a40;">
+    <div class="row">
+        <div id="controls" class="col-sm-1">
+          <p>Slider</p>
         </div>
-        <div id="map" class="col-9">
-          <img src="https://eoimages.gsfc.nasa.gov/images/imagerecords/39000/39594/Pyongyang_560.jpg" alt="Map">
+        <div id="map" class="col-sm-9">
+    				<div onload="mapzoom.add(this);">
+              <img src="https://eoimages.gsfc.nasa.gov/images/imagerecords/81000/81053/ISS035-E-027265_lrg.jpg" alt="Map" class="responsive">
+            </div>
         </div>
-        <div id="infoOut" class="col-2">
+        <div id="infoOut" class="col-sm-2">
           <div class="dropdown">
               <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Data Output
               <span class="caret"></span></button>
@@ -29,8 +43,13 @@
               </ul>
           </div>
         </div>
-    </div>          
-</div>
+    </div>
+  </div>
+  <div class="container-fluid" id="social" style="background-color:#343a40;">
+    <div class="col-sm-4"><li><a href="https://www.facebook.com/groups/landhermitcrabowners/">GitHub</a></li></div>
+    <div class="col-sm-4"><li><a href="https://www.umsl.edu/mathcs/undergraduate-studies/BS-cs.html">UMSL CS</a></li></div>
+    <div class="col-sm-4"><li><a href="https://visibleearth.nasa.gov/topic/666/human-dimensions?page=1">Nasa Human Dimensions</a></li></div>
+  </div>
 
 </body>
 </html>
