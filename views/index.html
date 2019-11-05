@@ -1,11 +1,48 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Adjuvant</title>
-        <link rel="stylesheet" href="foo.css">
-    </head>
-    <body>
-        <p>asdfasdfasdf</p>
-        Hello World!
-    </body>
+<html lang="en">
+<head>
+    <title>Adjuvant basic example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="foo.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <div id="slider" class="row content">
+        <div class="col-lg-3">
+            slider
+            <div id="drone sprite">
+                <canvas width="300" height="540">
+                <!--<div id="drone-sprite">-->
+                    <!--<p id="drone-image"></p>-->
+                <!--</div>-->
+                </canvas>
+                <!--Javascript for sprite animation-->
+                <script rel="script" src="sprite.js"></script>
+            </div>
+
+        </div>
+        <div id="map" class="col-lg-6">
+            <img src="https://eoimages.gsfc.nasa.gov/images/imagerecords/39000/39594/Pyongyang_560.jpg" alt="Map">
+        </div>
+        <div id="infoOut" class="col-lg-3">
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Data Output
+                    <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">blah</a></li>
+                    <li><a href="#">blahh</a></li>
+                    <li><a href="#">ahhhhh</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
 </html>
