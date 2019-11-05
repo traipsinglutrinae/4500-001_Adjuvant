@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="mapzoom.js"></script>
+  <script type="text/javascript" src="thirdparty/mapzoom.js"></script>
   <style>
     .responsive {
       width: 100%;
@@ -54,7 +54,7 @@
         </div>
         <div id="map" class="col-sm-9">
     				<div id="mapzoom" class="mapzoom" onload="mapzoom.add(this);">
-              <div id="wrapper" unselectable="on"><div id="mapper" unselectable="on"><img id="currentMap" onLoad="mapzoom.add(this);" src="1.jpg" width="800" height="600" alt="" border="0"/>
+              <div id="wrapper" unselectable="on"><div id="mapper" unselectable="on"><img id="currentMap" onLoad="mapzoom.add(this);" src="img/1.jpg" width="800" height="600" alt="" border="0"/>
                 <script type="text/javascript">
                     mapzoom.add(document.getElementById('img'));
                     if(typeof $=='undefined') {function $(v) {return(document.getElementById(v));}}
