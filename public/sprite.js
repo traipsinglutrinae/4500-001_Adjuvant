@@ -24,6 +24,10 @@ const HEIGHT = 25;
 const SCALED_WIDTH = SCALE * WIDTH;
 const SCALED_HEIGHT = SCALE * HEIGHT;
 
+let lineWidth = 10;
+let leftX = 0;
+let rightX = 350;
+
 
 // draws all canvas elements: drone, indicator line, iso map
 function drawFrame(frameX, frameY, canvasX, canvasY) {
@@ -34,11 +38,14 @@ function drawFrame(frameX, frameY, canvasX, canvasY) {
     // draws indicator line.
     ctx.beginPath();
     ctx.moveTo(canvasX + 19, canvasY + 20);
-    ctx.strokeStyle = "grey";
-    ctx.lineWidth = 5;
+    ctx.fillStyle = "grey";
+    // ctx.strokeStyle = "grey";
+    // ctx.lineWidth = lineWidth;
     // ctx.strokeOpacity = 5;
-    ctx.lineTo(168, 550);
-    ctx.stroke();
+    // ctx.lineTo(168, 550);
+    ctx.lineTo(leftX, 540);
+    ctx.lineTo(rightX, 540);
+    ctx.fill();
 
     // draws iso map
     ctx.drawImage(img, 0, 353);
@@ -60,7 +67,7 @@ function keyUpListener(event) {
 
 // sets starting position for drone sprite and movement speed.
 const MOVEMENT_SPEED = 1;
-let positionX = 150;
+let positionX = 140;
 let positionY = 250;
 
 function gameLoop() {
@@ -68,9 +75,19 @@ function gameLoop() {
 
     //captures up and down movement.
     if (keyPresses.w) {
-        positionY -= MOVEMENT_SPEED;
+        // If drone has not reached maximum height, update position.
+        if (positionY >= 0) {
+            positionY -= MOVEMENT_SPEED;
+            lineWidth += 1;
+        }
     } else if (keyPresses.s) {
-        positionY += MOVEMENT_SPEED;
+        // If drone has not reached minimum height, update position.
+        if (positionY <= 300) {
+            positionY += MOVEMENT_SPEED;
+            if (lineWidth >= 5) {
+                lineWidth -= 1;
+            }
+        }
     // }
 
     // captures left and right movement, not implemented at this point.
