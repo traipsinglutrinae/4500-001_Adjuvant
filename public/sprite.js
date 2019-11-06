@@ -24,7 +24,7 @@ const HEIGHT = 25;
 const SCALED_WIDTH = SCALE * WIDTH;
 const SCALED_HEIGHT = SCALE * HEIGHT;
 
-let lineWidth = 10;
+// holds position for left and right endpoints of indicator cone.
 let leftX = 0;
 let rightX = 350;
 
@@ -35,14 +35,10 @@ function drawFrame(frameX, frameY, canvasX, canvasY) {
         frameX * WIDTH, frameY * HEIGHT, WIDTH, HEIGHT,
         canvasX, canvasY, SCALED_WIDTH, SCALED_HEIGHT);
 
-    // draws indicator line.
+    // draws indicator cone.
     ctx.beginPath();
     ctx.moveTo(canvasX + 19, canvasY + 20);
     ctx.fillStyle = "grey";
-    // ctx.strokeStyle = "grey";
-    // ctx.lineWidth = lineWidth;
-    // ctx.strokeOpacity = 5;
-    // ctx.lineTo(168, 550);
     ctx.lineTo(leftX, 540);
     ctx.lineTo(rightX, 540);
     ctx.fill();
@@ -78,15 +74,11 @@ function gameLoop() {
         // If drone has not reached maximum height, update position.
         if (positionY >= 0) {
             positionY -= MOVEMENT_SPEED;
-            lineWidth += 1;
         }
     } else if (keyPresses.s) {
         // If drone has not reached minimum height, update position.
         if (positionY <= 300) {
             positionY += MOVEMENT_SPEED;
-            if (lineWidth >= 5) {
-                lineWidth -= 1;
-            }
         }
     // }
 
