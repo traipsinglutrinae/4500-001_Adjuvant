@@ -48,7 +48,8 @@ function drawFrame(frameX, frameY, canvasX, canvasY) {
     ctx.fill();
     ctx.beginPath();
     ctx.fillStyle = "rgba(192,192,192,0.5)";
-    ctx.arc(150, 893/2, radius, 0, 2 * Math.PI);
+    ctx.rect(leftX, 415, radius*2, radius*2);
+    // ctx.arc(150, 893/2, radius, 0, 2 * Math.PI);
     ctx.fill();
 
 
