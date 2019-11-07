@@ -1,21 +1,36 @@
-function injectMap() {
-  const map = `<div id="mapzoom" class="mapzoom" onload="mapzoom.add(this);"><div id="wrapper" unselectable="on"><div id="mapper" unselectable="on"><img id="currentMap" onLoad="mapzoom.add(this);" src="img/1.jpg" width="800" height="600" alt="" border="0"/></div>`;
+function injectMap(imgLocation) {
+  const map = `<div id="mapzoom" class="mapzoom" onload="mapzoom.add(this);"><div id="wrapper" unselectable="on"><div id="mapper" unselectable="on"><img id="currentMap" onLoad="mapzoom.add(this);" src="${imgLocation}" width="800" height="600" alt="" border="0"/></div>`;
 
+  $("#map").empty();
   $("#map").append(map);
 }
 
 function changeMap() {
-  var current_image = document.getElementById("currentMap").src;
-  if (current_image == "1.jpg") {
-    document.getElementById("currentMap").src = "2.jpg";
-  } else if (current_image == "2.jpg") {
-    document.getElementById("currentMap").src = "3.jpg";
-  } else if (current_image == "3.jpg") {
-    document.getElementById("currentMap").src = "4.jpg";
-  } else if (current_image == "4.jpg") {
-    document.getElementById("currentMap").src = "5.jpg";
-  } else if (current_image == "5.jpg") {
-    document.getElementById("currentMap").src = "1.jpg";
+  currentMap = ++currentMap > 5 ? 1 : currentMap;
+
+  switch (currentMap) {
+    case 1:
+      injectMap("img/1.jpg");
+      break;
+    case 2:
+      injectMap("img/2.jpg");
+      break;
+    case 3:
+      injectMap("img/3.jpg");
+      break;
+    case 4:
+      injectMap("img/4.jpg");
+      break;
+    case 5:
+      injectMap("img/5.jpg");
+      break;
+    default:
+      injectMap("img/1.jpg");
   }
-  document.getElementById("mapzoom").contentWindow.location.reload(true);
 }
+
+document.addEventListener("DOMContentLoaded", event => {
+  injectMap("img/1.jpg");
+});
+
+let currentMap = 1;
