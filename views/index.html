@@ -8,6 +8,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="thirdparty/mapzoom.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
   <style>
     .responsive {
       width: 100%;
@@ -21,24 +22,6 @@
 		}
 
 </style>
-<script>
-    function changeMap()
-    {
-      var current_image = document.getElementById("currentMap").src;
-      if(current_image == "1.jpg"){
-          document.getElementById("currentMap").src = "2.jpg";
-      }else if(current_image == "2.jpg"){
-          document.getElementById("currentMap").src = "3.jpg";
-      }else if(current_image == "3.jpg"){
-          document.getElementById("currentMap").src = "4.jpg";
-      }else if(current_image == "4.jpg"){
-          document.getElementById("currentMap").src = "5.jpg";
-      }else if(current_image == "5.jpg"){
-          document.getElementById("currentMap").src = "1.jpg";
-      }
-      document.getElementById("mapzoom").contentWindow.location.reload(true);
-    }
-</script>
 </head>
 <body>
   <div class="container-fluid" style="background-color:#343a40;">
@@ -55,30 +38,6 @@
         <div id="map" class="col-sm-9">
     				<div id="mapzoom" class="mapzoom" onload="mapzoom.add(this);">
               <div id="wrapper" unselectable="on"><div id="mapper" unselectable="on"><img id="currentMap" onLoad="mapzoom.add(this);" src="img/1.jpg" width="800" height="600" alt="" border="0"/>
-                <script type="text/javascript">
-                    mapzoom.add(document.getElementById('img'));
-                    if(typeof $=='undefined') {function $(v) {return(document.getElementById(v));}}
-                    mapzoom.add($('img'));
-                    mapzoom.add($('img'), {fading:false, curpath:'cursors/'});
-                    mapzoom.set($('img'),'overview',false);
-                    <button type="button" onclick="mapzoom.set($('img'),'zoomin',true);"> + </button>
-                    <button type="button" onclick="mapzoom.set($('img'),'zoomout',true);"> - </button>
-                    alert(mapzoom.get($('img'),'maxwidth'));
-                    alert('mapzoom: '+mapzoom.version+' ('+mapzoom.released+')');
-                    mapzoom.info($('img'),'<p>eat my shorts<\/p>');
-                    mapzoom.source($('img'),'images/world.jpg',false);
-                    mapzoom.lowsource($('img'),'images/world_lowres.jpg');
-                    mapzoom.zooming($('img'),100);
-                    mapzoom.moveto($('img'),'50%','50%');
-                    mapzoom.kenburns($('img'),[25,75,100]);
-                    mapzoom.play($('img'),0,true,[[25,75,100],[0,0,0]]));
-                    mapzoom.stop($('img'));
-                    mapzoom.construct($('img'),[{x:250,y:75,w:48,h:48,src:'icon.png',id:'ico'}]);
-                    mapzoom.destruct($('img'),'ico');
-                    mapzoom.createarea($('img'),'Samoa',{shape:'poly',coords:[10,10,100,100],alttitle:'Samoa'});
-                    mapzoom.modifyarea($('img'),'Samoa',{coords:[100,100,210,210]});
-                    mapzoom.remove($('img'));>
-                </script>
             </div>
             </div>
         </div>
