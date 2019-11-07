@@ -25,8 +25,9 @@ const SCALED_WIDTH = SCALE * WIDTH;
 const SCALED_HEIGHT = SCALE * HEIGHT;
 
 // holds position for left and right endpoints of indicator cone.
-let leftX = 0;
-let rightX = 350;
+let leftX = 125;
+let rightX = 175;
+let radius = 25;
 
 
 // draws all canvas elements: drone, indicator line, iso map
@@ -35,16 +36,23 @@ function drawFrame(frameX, frameY, canvasX, canvasY) {
         frameX * WIDTH, frameY * HEIGHT, WIDTH, HEIGHT,
         canvasX, canvasY, SCALED_WIDTH, SCALED_HEIGHT);
 
-    // draws indicator cone.
-    ctx.beginPath();
-    ctx.moveTo(canvasX + 19, canvasY + 20);
-    ctx.fillStyle = "grey";
-    ctx.lineTo(leftX, 540);
-    ctx.lineTo(rightX, 540);
-    ctx.fill();
 
     // draws iso map
     ctx.drawImage(img, 0, 353);
+    // draws indicator cone.
+    ctx.beginPath();
+    ctx.moveTo(canvasX + 19, canvasY + 20);
+    ctx.fillStyle = "rgba(192,192,192,0.5)";
+    ctx.lineTo(leftX, 446.5);
+    ctx.lineTo(rightX, 446.5);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.fillStyle = "rgba(192,192,192,0.5)";
+    ctx.arc(150, 893/2, radius, 0, 2 * Math.PI);
+    ctx.fill();
+
+
+
 }
 
 // captures keypress events, could probably do this another way, but I took this from an online source so I just left
@@ -63,7 +71,7 @@ function keyUpListener(event) {
 
 // sets starting position for drone sprite and movement speed.
 const MOVEMENT_SPEED = 1;
-let positionX = 140;
+let positionX = 132;
 let positionY = 250;
 
 function gameLoop() {
@@ -72,13 +80,30 @@ function gameLoop() {
     //captures up and down movement.
     if (keyPresses.w) {
         // If drone has not reached maximum height, update position.
-        if (positionY >= 0) {
+        if (positionY >= 100) {
             positionY -= MOVEMENT_SPEED;
+            if (leftX > 90) {
+                leftX -= 0.33;
+                rightX += 0.33;
+                radius += 0.33;
+            }
         }
     } else if (keyPresses.s) {
         // If drone has not reached minimum height, update position.
         if (positionY <= 300) {
             positionY += MOVEMENT_SPEED;
+            if (rightX <= 300){
+                if (leftX < 125) {
+                    leftX += 0.33;
+                }
+                if (rightX > 175) {
+                    rightX -= 0.33;
+                }
+                if (radius > 25){
+                    radius -= 0.33;
+                }
+            }
+
         }
     // }
 
@@ -89,6 +114,8 @@ function gameLoop() {
     //     positionX += MOVEMENT_SPEED;
     }
     drawFrame(0, 0, positionX, positionY);
+
+
 
     // animates canvas
     window.requestAnimationFrame(gameLoop);

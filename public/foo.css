@@ -8,15 +8,3 @@ canvas{
     background-color: black;
 }
 
-#drone-image {
-    background: url('css_sprites.png') no-repeat -16px -506px;
-    width: 34px;
-    height: 20px;
-}
-
-#indicator_line{
-    height: 200px;
-    width: 6px;
-    color: blue;
-
-}
