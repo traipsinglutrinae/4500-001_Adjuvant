@@ -1,67 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>Adjuvant basic example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="thirdparty/mapzoom.js"></script>
-  <script type="text/javascript" src="js/index.js"></script>
-  <style>
-    .responsive {
-      width: 100%;
-      height: auto;
-    }
+  <head>
+    <title>Adjuvant basic example</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="thirdparty/mapzoom.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <style>
+      .responsive {
+        width: 100%;
+        height: auto;
+      }
 
-    #mapper {
-			-webkit-user-select: none; -moz-user-select: none;
-			width: 100%; height: 100%; float:left; display:block;
-			position:relative;
-		}
-
-</style>
-</head>
-<body>
-  <div class="container-fluid" style="background-color:#343a40;">
-    <div class="status" id="status">
-  			<div class="col-sm-1" style="background-color:#20c997;">Map Status: </div>
-  			<div class="col-sm-11" style="background-color:#17a2b8;">0/3 Map Active!</div>
+      #mapper {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        width: 100%;
+        height: 100%;
+        float: left;
+        display: block;
+        position: relative;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid" style="background-color:#343a40;">
+      <div class="status" id="status">
+        <div class="col-sm-1" style="background-color:#20c997;">
+          Map Status:
+        </div>
+        <div class="col-sm-11" style="background-color:#17a2b8;">
+          0/3 Map Active!
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="container-fluid" style="background-color:#343a40;">
-    <div class="row">
+    <div class="container-fluid" style="background-color:#343a40;">
+      <div class="row">
         <div id="controls" class="col-sm-1">
           <p>Slider</p>
         </div>
         <div id="map" class="col-sm-9">
-    				<div id="mapzoom" class="mapzoom" onload="mapzoom.add(this);">
+          <!-- <div id="mapzoom" class="mapzoom" onload="mapzoom.add(this);">
               <div id="wrapper" unselectable="on"><div id="mapper" unselectable="on"><img id="currentMap" onLoad="mapzoom.add(this);" src="img/1.jpg" width="800" height="600" alt="" border="0"/>
             </div>
-            </div>
+            </div> -->
         </div>
         <div id="infoOut" class="col-sm-2">
           <div id="mapChanger">
             <button type="button" onclick="changeMap()">Change Map</button>
           </div>
           <div class="dropdown">
-              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">More Stuff?
-              <span class="caret"></span></button>
-              <ul class="dropdown-menu">
-                <li><a href="#">blahh</a></li>
-                <li><a href="#">blahh</a></li>
-                <li><a href="#">ahhhhh</a></li>
-              </ul>
+            <button
+              class="btn btn-primary dropdown-toggle"
+              type="button"
+              data-toggle="dropdown"
+            >
+              More Stuff? <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="#">blahh</a></li>
+              <li><a href="#">blahh</a></li>
+              <li><a href="#">ahhhhh</a></li>
+            </ul>
           </div>
         </div>
+      </div>
     </div>
-  </div>
-  <div class="container-fluid" id="social" style="background-color:#343a40;">
-    <div class="col-sm-4"><li><a href="https://www.facebook.com/groups/landhermitcrabowners/">GitHub</a></li></div>
-    <div class="col-sm-4"><li><a href="https://www.umsl.edu/mathcs/undergraduate-studies/BS-cs.html">UMSL CS</a></li></div>
-    <div class="col-sm-4"><li><a href="https://visibleearth.nasa.gov/topic/666/human-dimensions?page=1">Nasa Human Dimensions</a></li></div>
-  </div>
-
-</body>
+    <div class="container-fluid" id="social" style="background-color:#343a40;">
+      <div class="col-sm-4">
+        <li>
+          <a href="https://www.facebook.com/groups/landhermitcrabowners/"
+            >GitHub</a
+          >
+        </li>
+      </div>
+      <div class="col-sm-4">
+        <li>
+          <a href="https://www.umsl.edu/mathcs/undergraduate-studies/BS-cs.html"
+            >UMSL CS</a
+          >
+        </li>
+      </div>
+      <div class="col-sm-4">
+        <li>
+          <a
+            href="https://visibleearth.nasa.gov/topic/666/human-dimensions?page=1"
+            >Nasa Human Dimensions</a
+          >
+        </li>
+      </div>
+    </div>
+  </body>
 </html>
