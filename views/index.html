@@ -13,42 +13,119 @@
     <script type="text/javascript" src="thirdparty/mapzoom.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <style>
-      .responsive {
+    /*  .responsive {
         width: 100%;
         height: auto;
       }
-
-      #mapper {
-        -webkit-user-select: none;
-        -moz-user-select: none;
+*/
+/*      #mapper {
+  			-webkit-user-select: none; -moz-user-select: none;
+  			width: 100%; height: 100%; float:left; display:block;
+  			position:relative;
+  		}
+*/
+      html,body {
         width: 100%;
         height: 100%;
-        float: left;
-        display: block;
-        position: relative;
+        margin: 0px;
+        padding: 0px;
+        overflow-x: hidden;
+        }
+      #currentMap {
+          height: 600px;
+          width: 90%;
       }
-    </style>
+      /* Remove the navbar's default margin-bottom and rounded borders */
+      .navbar {
+          margin-bottom: 0;
+          border-radius: 0;
+          background-color: #343a40;
+      }
+      .infoOut {
+          height: 100%;
+      }
+      /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+      .row.content {
+          height: 100%;
+          width: 100%;
+          /*height: 800px;*/
+      }
+
+      /* Set gray background color and 100% height */
+      .sidenav {
+          padding-top: 20px;
+          background-color: #333;
+          height: 100%;
+          color: #269;
+      }
+
+      /* Set black background color, white text and some padding */
+      footer {
+          background-color: #333;
+          color: white;
+          margin: 0px;
+          padding: 0px;
+          overflow-x: hidden;
+      }
+
+      .custom-width{
+          width: 128px;
+      }
+
+      /* On small screens, set height to 'auto' for sidenav and grid */
+      @media screen and (max-width: 767px) {
+          .sidenav {
+              height: auto;
+              padding: 15px;
+          }
+          .row.content {height:auto;}
+      }
+  </style>
   </head>
   <body>
+      <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand">Grades:</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class=" grade active custom-width text-center"><a href="#">K-2</a></li>
+                    <li class=" grade custom-width text-center"><a href="#">3-5</a></li>
+                    <li class=" grade custom-width text-center"><a href="#">6-8</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <div class="container-fluid" style="background-color:#343a40;">
       <div class="status" id="status">
         <div class="col-sm-1" style="background-color:#20c997;">
           Map Status:
         </div>
         <div class="col-sm-11" style="background-color:#17a2b8;">
-          0/3 Map Active!
+          5/10 Maps Active!
         </div>
       </div>
     </div>
-    <div class="container-fluid" style="background-color:#343a40;">
-      <div class="row">
-        <div id="controls" class="col-sm-1">
-          <p>Slider</p>
+
+    <div class="container-fluid text-center" >
+      <div class="row content">
+        <div id="drone sprite" class="col-sm-3 sidenav" width="300" height="540">
+          <p>Drone Altitude</p>
+          <canvas width="300" height="540">
+          </canvas>
+          <script rel="script" src="sprite.js"></script>
         </div>
-        <div id="map" class="col-sm-9">
+        <div id="map" class="col-sm-8 text-left" style="background-color:#333;">
           <!-- mapZoom Map gets injected here from index.js -->
+
         </div>
-        <div id="infoOut" class="col-sm-2">
+        <div id="infoOut" class="infoOut col-sm-1 sidenav" style="background-color:#333;">
           <div id="mapChanger">
             <button type="button" onclick="changeMap()">Change Map</button>
           </div>
@@ -66,13 +143,53 @@
               <li><a href="#">ahhhhh</a></li>
             </ul>
           </div>
+          <div>
+            <p>.</p>
+            <p>...</p><!--I know this is a god awful way to do this... just trying to fill random white space for monday demo-->
+            <p>...</p>
+            <p>...</p>
+            <button>Use Pageup & PageDown to control altitude</button>
+            <button>Use arrow keys to move around the map</button>
+            <p>...</p>
+            <p>...</p>
+            <p>...</p>
+            <p>.</p>
+            <br/>
         </div>
       </div>
     </div>
-    <div class="container-fluid" id="social" style="background-color:#343a40;">
+    <div class="container-fluid text-center" id="social" style="background-color:#333;">
       <div class="col-sm-4">
         <li>
-          <a href="https://www.facebook.com/groups/landhermitcrabowners/"
+        </li>
+      </div>
+      <div class="col-sm-4">
+        <li>
+        </li>
+      </div>
+      <div class="col-sm-4">
+        <li>
+        </li>
+      </div>
+    </div>
+    <div class="container-fluid text-center" id="social" style="background-color:#333;">
+      <div class="col-sm-4">
+        <li>
+        </li>
+      </div>
+      <div class="col-sm-4">
+        <li>
+        </li>
+      </div>
+      <div class="col-sm-4">
+        <li>
+        </li>
+      </div>
+  </div>
+    <footer class="container-fluid text-center" id="social" style="background-color:#343a40;">
+      <div class="col-sm-4">
+        <li>
+          <a href="https://github.com/traipsinglutrinae/4500-001_Adjuvant"
             >GitHub</a
           >
         </li>
@@ -92,6 +209,7 @@
           >
         </li>
       </div>
-    </div>
+    </footer>
+
   </body>
 </html>
