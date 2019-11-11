@@ -2,7 +2,7 @@ let drone = new Image();
 let img = new Image();
 
 
-// image source for isometric map, used random image file, can change later.
+// image source for isometric map.
 img.src = "landscape.png";
 
 // upload sprite image for drone animation
@@ -28,6 +28,7 @@ const SCALED_HEIGHT = SCALE * HEIGHT;
 let leftX = 125;
 let rightX = 175;
 let radius = 25;
+let squareY = 415;
 
 
 // draws all canvas elements: drone, indicator line, iso map
@@ -48,7 +49,7 @@ function drawFrame(frameX, frameY, canvasX, canvasY) {
     ctx.fill();
     ctx.beginPath();
     ctx.fillStyle = "rgba(192,192,192,0.5)";
-    ctx.rect(leftX, 415, radius*2, radius*2);
+    ctx.rect(leftX, squareY, radius*2, radius*2);
     // ctx.arc(150, 893/2, radius, 0, 2 * Math.PI);
     ctx.fill();
 
@@ -73,7 +74,7 @@ function keyUpListener(event) {
 // sets starting position for drone sprite and movement speed.
 const MOVEMENT_SPEED = 1;
 let positionX = 132;
-let positionY = 250;
+let positionY = 225;
 
 function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -81,27 +82,33 @@ function gameLoop() {
     //captures up and down movement.
     if (keyPresses.w) {
         // If drone has not reached maximum height, update position.
-        if (positionY >= 100) {
+        // maximum height set to y = 150.
+        if (positionY >= 150) {
             positionY -= MOVEMENT_SPEED;
             if (leftX > 90) {
-                leftX -= 0.33;
-                rightX += 0.33;
-                radius += 0.33;
+                leftX -= 0.30;
+                rightX += 0.30;
+                radius += 0.30;
+                squareY -= 0.30;
             }
         }
     } else if (keyPresses.s) {
         // If drone has not reached minimum height, update position.
-        if (positionY <= 300) {
+        // minimum height set to y = 270.
+        if (positionY <= 270) {
             positionY += MOVEMENT_SPEED;
             if (rightX <= 300){
-                if (leftX < 125) {
-                    leftX += 0.33;
+                if (leftX < 140) {
+                    leftX += 0.30;
                 }
-                if (rightX > 175) {
-                    rightX -= 0.33;
+                if (rightX > 160) {
+                    rightX -= 0.30;
                 }
-                if (radius > 25){
-                    radius -= 0.33;
+                if (radius > 10){
+                    radius -= 0.30;
+                }
+                if (squareY < 440){
+                    squareY += 0.30;
                 }
             }
 
