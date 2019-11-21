@@ -1,3 +1,10 @@
 p {
     color: red
 }
+
+canvas{
+    border: 2px;
+    border: black;
+    background-color: black;
+}
+

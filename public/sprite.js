@@ -3,10 +3,12 @@ let img = new Image();
 
 
 // image source for isometric map.
+
 img.src = "img/landscape.png";
 
 // upload sprite image for drone animation
 drone.src = "img/Drone_sprite.png";
+
 drone.height = 15;
 drone.width = 34;
 drone.onload = function() {
@@ -72,9 +74,11 @@ function keyUpListener(event) {
 }
 
 // sets starting position for drone sprite and movement speed.
-const MOVEMENT_SPEED = 1;
+
+const MOVEMENT_SPEED = 1.25;
 let positionX = 132;
-let positionY = 150;
+let positionY = 225;
+
 
 function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -82,10 +86,11 @@ function gameLoop() {
     //captures up and down movement.
     if (keyPresses.PageUp) {
         // If drone has not reached maximum height, update position.
-        // maximum height set to y = 150.
-        if (positionY >= 150) {
+
+        // maximum height set to y = 0.
+        if (positionY >= 0) {
             positionY -= MOVEMENT_SPEED;
-            if (leftX > 90) {
+            if (leftX > 65) {
                 leftX -= 0.30;
                 rightX += 0.30;
                 radius += 0.30;
@@ -95,7 +100,8 @@ function gameLoop() {
     } else if (keyPresses.PageDown) {
         // If drone has not reached minimum height, update position.
         // minimum height set to y = 270.
-        if (positionY <= 270) {
+
+        if (positionY <= 300) {
             positionY += MOVEMENT_SPEED;
             if (rightX <= 300){
                 if (leftX < 140) {
@@ -113,13 +119,7 @@ function gameLoop() {
             }
 
         }
-    // }
 
-    // captures left and right movement, not implemented at this point.
-    // if (keyPresses.a) {
-    //     positionX -= MOVEMENT_SPEED;
-    // } else if (keyPresses.d) {
-    //     positionX += MOVEMENT_SPEED;
     }
     drawFrame(0, 0, positionX, positionY);
 
@@ -127,4 +127,5 @@ function gameLoop() {
 
     // animates canvas
     window.requestAnimationFrame(gameLoop);
+
 }
