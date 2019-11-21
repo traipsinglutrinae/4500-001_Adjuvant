@@ -1,18 +1,81 @@
-function injectMap(imgLocation) {
-  const map = `<div id="mapzoom" class="mapzoom" onload="mapzoom.add(this);"><div id="wrapper" unselectable="on"><div id="mapper" unselectable="on"><img id="currentMap" src="${imgLocation}" width="800" height="600" alt="" border="0"/></div>`;
+class SatMap {
+  constructor(canvas) {
+    this.canvas = canvas || undefined;
+    this.zoomLevel = 0;
+    this.xPercent = 0;
+    this.yPercent = 0;
+  }
 
-  // $("#map").empty();
-  // const canvasDiv = $("#map");
-  // const canvas = $(`<canvas id="myCanvas" width="200" height="100"></canvas>`);
-  const canvas = $("#myCanvas")[0];
-  console.log(canvas);
-  const ctx = canvas.getContext("2d");
-  const img = $(
-    `<img id="currentMap" src="${imgLocation}" width="800" height="600" alt="" border="0"/>`
-  )[0];
-  ctx.drawImage(img, 10, 10);
-  // $("#map").append(canvasDiv);
-  // $("#mapzoom").focus();
+  zoomIn() {
+    this.zoomLevel = this.zoomLevel < 100 ? this.zoomLevel + 1 : 100;
+    this.render();
+  }
+
+  zoomOut() {
+    this.zoomLevel = this.zoomLevel > 0 ? this.zoomLevel - 1 : 0;
+    this.render();
+  }
+
+  zoomTo(percent) {
+    this.zoomLevel = percent;
+    if (this.zoomLevel > 100) {
+      this.zoomLevel = 100;
+    } else if (this.zoomLevel < 0) {
+      this.zoomLevel = 0;
+    }
+
+    this.render;
+  }
+
+  moveRight() {
+    this.xPercent = this.xPercent < 100 ? this.xPercent + 1 : 100;
+    this.render();
+  }
+
+  moveLeft() {
+    this.xPercent = this.xPercent > 0 ? this.xPercent - 1 : 0;
+    this.render();
+  }
+
+  moveUp() {
+    this.yPercent = this.yPercent > 0 ? this.yPercent - 1 : 0;
+    this.render();
+  }
+
+  moveDown() {
+    this.yPercent = this.yPercent < 100 ? this.yPercent + 1 : 100;
+    this.render();
+  }
+
+  render() {
+    const ctx = this.canvas.getContext("2d");
+
+    const img = new Image(); // Image constructor
+    img.onload = () => {
+      const srcRight = img.width * (100 - this.zoomLevel) * 0.01;
+      const srcBottom = img.height * (100 - this.zoomLevel) * 0.01;
+      const srcLeft = img.width * this.xPercent * 0.01;
+      const srcTop = img.height * this.yPercent * 0.01;
+
+      console.log(srcLeft, srcTop, srcRight, srcBottom, this);
+
+      ctx.fillStyle = "#333";
+      ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+      ctx.drawImage(
+        img,
+        srcLeft,
+        srcTop,
+        srcLeft + srcRight,
+        srcTop + srcBottom,
+        0,
+        0,
+        this.canvas.width,
+        this.canvas.height
+      );
+      // ctx.drawImage(img, 600, 450, 800, 600);
+    };
+    img.src = "img/1.jpg";
+  }
 }
 
 function changeMap() {
@@ -39,19 +102,43 @@ function changeMap() {
   }
 }
 
+const map = new SatMap();
+
 document.addEventListener("DOMContentLoaded", event => {
   // injectMap("img/1.jpg");
 });
 
 window.onload = function() {
   const canvas = document.getElementById("myCanvas");
-  const ctx = canvas.getContext("2d");
+  map.canvas = canvas;
+  map.render();
+};
 
-  const img = new Image(); // Image constructor
-  img.onload = () => {
-    ctx.drawImage(img, 0, 0, 800, 600);
-  };
-  img.src = "img/1.jpg";
+document.onkeypress = function(e) {
+  e = e || window.event;
+  var charCode = typeof e.which == "number" ? e.which : e.keyCode;
+  switch (charCode) {
+    case 61:
+      map.zoomIn();
+      break;
+    case 45:
+      map.zoomOut();
+      break;
+    case 100:
+      map.moveRight();
+      break;
+    case 97:
+      map.moveLeft();
+      break;
+    case 119:
+      map.moveUp();
+      break;
+    case 115:
+      map.moveDown();
+      break;
+    default:
+      console.log(charCode);
+  }
 };
 
 let currentMap = 1;
