@@ -7,12 +7,12 @@ class SatMap {
   }
 
   zoomIn() {
-    this.zoomLevel = this.zoomLevel < 100 ? this.zoomLevel + 1 : 100;
+    this.zoomLevel = this.zoomLevel < 100 ? this.zoomLevel + 0.5 : 100;
     this.render();
   }
 
   zoomOut() {
-    this.zoomLevel = this.zoomLevel > 0 ? this.zoomLevel - 1 : 0;
+    this.zoomLevel = this.zoomLevel > 0 ? this.zoomLevel - 0.5 : 0;
     this.render();
   }
 
@@ -28,22 +28,22 @@ class SatMap {
   }
 
   moveRight() {
-    this.xPercent = this.xPercent < 100 ? this.xPercent + 1 : 100;
+    this.xPercent = this.xPercent < 100 ? this.xPercent + 0.5 : 100;
     this.render();
   }
 
   moveLeft() {
-    this.xPercent = this.xPercent > 0 ? this.xPercent - 1 : 0;
+    this.xPercent = this.xPercent > 0 ? this.xPercent - 0.5 : 0;
     this.render();
   }
 
   moveUp() {
-    this.yPercent = this.yPercent > 0 ? this.yPercent - 1 : 0;
+    this.yPercent = this.yPercent > 0 ? this.yPercent - 0.5 : 0;
     this.render();
   }
 
   moveDown() {
-    this.yPercent = this.yPercent < 100 ? this.yPercent + 1 : 100;
+    this.yPercent = this.yPercent < 100 ? this.yPercent + 0.5 : 100;
     this.render();
   }
 
