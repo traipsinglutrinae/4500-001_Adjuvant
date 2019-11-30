@@ -2,17 +2,26 @@ class SatMap {
   constructor(canvas) {
     this.canvas = canvas || undefined;
     this.zoomLevel = 0;
-    this.xPercent = 0;
-    this.yPercent = 0;
+    this.xCenter = 0;
+    this.yCenter = 0;
+    this.stepScale = 10;
+  }
+
+  get width() {
+    return this.canvas.width;
+  }
+
+  get height() {
+    return this.canvas.height;
   }
 
   zoomIn() {
-    this.zoomLevel = this.zoomLevel < 100 ? this.zoomLevel + 0.5 : 100;
+    this.zoomLevel = this.zoomLevel < 100 ? this.zoomLevel + 1 : 100;
     this.render();
   }
 
   zoomOut() {
-    this.zoomLevel = this.zoomLevel > 0 ? this.zoomLevel - 0.5 : 0;
+    this.zoomLevel = this.zoomLevel > 0 ? this.zoomLevel - 1 : 0;
     this.render();
   }
 
@@ -28,22 +37,24 @@ class SatMap {
   }
 
   moveRight() {
-    this.xPercent = this.xPercent < 100 ? this.xPercent + 0.5 : 100;
+    const maxRight = (-1 * this.width) / 2;
+    this.xCenter -= this.stepScale; //* (100 - this.zoomLevel);
+    this.xCenter = this.xCenter <= maxRight ? maxRight : this.xCenter;
     this.render();
   }
 
   moveLeft() {
-    this.xPercent = this.xPercent > 0 ? this.xPercent - 0.5 : 0;
+    const maxLeft = this.width / 2;
+    this.xCenter += this.stepScale; // * (100 - this.zoomLevel);
+    this.xCenter = this.xCenter >= maxLeft ? maxLeft : this.xCenter;
     this.render();
   }
 
   moveUp() {
-    this.yPercent = this.yPercent > 0 ? this.yPercent - 0.5 : 0;
     this.render();
   }
 
   moveDown() {
-    this.yPercent = this.yPercent < 100 ? this.yPercent + 0.5 : 100;
     this.render();
   }
 
@@ -52,12 +63,20 @@ class SatMap {
 
     const img = new Image(); // Image constructor
     img.onload = () => {
-      const srcRight = img.width * (100 - this.zoomLevel) * 0.01;
-      const srcBottom = img.height * (100 - this.zoomLevel) * 0.01;
-      const srcLeft = img.width * this.xPercent * 0.01;
-      const srcTop = img.height * this.yPercent * 0.01;
+      const windowScale = {
+        height: img.height / this.height,
+        width: img.width / this.width
+      };
+      const srcWindow = {
+        height: (100 - this.zoomLevel) * 0.01 * img.height,
+        width: (100 - this.zoomLevel) * 0.01 * img.width
+      };
+      const srcLeft = this.xCenter * windowScale.width; // + srcWindow.width;
+      const srcTop = this.yCenter * windowScale.height; // - srcWindow.height;
+      const srcRight = this.xCenter * windowScale.width + srcWindow.width;
+      const srcBottom = this.yCenter * windowScale.height + srcWindow.height;
 
-      console.log(srcLeft, srcTop, srcRight, srcBottom, this);
+      const ratio = (srcRight - srcLeft) / (srcBottom - srcTop);
 
       ctx.fillStyle = "#333";
       ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
@@ -65,8 +84,8 @@ class SatMap {
         img,
         srcLeft,
         srcTop,
-        srcLeft + srcRight,
-        srcTop + srcBottom,
+        srcRight,
+        srcBottom,
         0,
         0,
         this.canvas.width,
