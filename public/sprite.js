@@ -27,10 +27,12 @@ const SCALED_WIDTH = SCALE * WIDTH;
 const SCALED_HEIGHT = SCALE * HEIGHT;
 
 // holds position for left and right endpoints of indicator cone.
-let leftX = 125;
-let rightX = 175;
-let radius = 25;
-let squareY = 415;
+// let leftX = 125;
+// let rightX = 175;
+let leftX = 65;
+let rightX = 255;
+let radius = 95;
+let squareY = 370;
 
 
 // draws all canvas elements: drone, indicator line, iso map
@@ -76,8 +78,8 @@ function keyUpListener(event) {
 // sets starting position for drone sprite and movement speed.
 
 const MOVEMENT_SPEED = 1.25;
-let positionX = 132;
-let positionY = 225;
+let positionX = 140;
+let positionY = 0;
 
 
 function gameLoop() {
@@ -86,7 +88,6 @@ function gameLoop() {
     //captures up and down movement.
     if (keyPresses.PageUp) {
         // If drone has not reached maximum height, update position.
-
         // maximum height set to y = 0.
         if (positionY >= 0) {
             positionY -= MOVEMENT_SPEED;
@@ -122,9 +123,6 @@ function gameLoop() {
 
     }
     drawFrame(0, 0, positionX, positionY);
-
-
-
     // animates canvas
     window.requestAnimationFrame(gameLoop);
 
