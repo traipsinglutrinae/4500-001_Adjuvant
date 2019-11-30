@@ -63,16 +63,19 @@ function drawFrame(frameX, frameY, canvasX, canvasY) {
 
 // captures keypress events, could probably do this another way, but I took this from an online source so I just left
 // it unchanged.
-let keyPresses = {};
+let charCode;
+let altitude = 100;
 
 window.addEventListener('keydown', keyDownListener);
 function keyDownListener(event) {
-    keyPresses[event.key] = true;
+    // Sets code of pressed key to charCode: 189 == Minus and 187 == Equal.
+    charCode = typeof event.which == "number" ? event.which : event.keyCode;
 }
 
 window.addEventListener('keyup', keyUpListener);
 function keyUpListener(event) {
-    keyPresses[event.key] = false;
+    // Sets charCode to zero once key is no longer pressed.
+    charCode = 0;
 }
 
 // sets starting position for drone sprite and movement speed.
@@ -86,24 +89,31 @@ function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     //captures up and down movement.
-    if (keyPresses.PageUp) {
+    if (charCode == 189) {
         // If drone has not reached maximum height, update position.
         // maximum height set to y = 0.
         if (positionY >= 0) {
             positionY -= MOVEMENT_SPEED;
+            if(altitude < 100) {
+                altitude += 0.47;
+            }
             if (leftX > 65) {
                 leftX -= 0.30;
                 rightX += 0.30;
                 radius += 0.30;
                 squareY -= 0.30;
             }
+
         }
-    } else if (keyPresses.PageDown) {
+    } else if (charCode == 187) {
         // If drone has not reached minimum height, update position.
         // minimum height set to y = 270.
 
         if (positionY <= 300) {
             positionY += MOVEMENT_SPEED;
+            if (altitude > 0) {
+                altitude -= .47;
+            }
             if (rightX <= 300){
                 if (leftX < 140) {
                     leftX += 0.30;
@@ -123,7 +133,18 @@ function gameLoop() {
 
     }
     drawFrame(0, 0, positionX, positionY);
+
+    // Rounds the altitude value 1 decimal place.
+    let rounded = Math.round(altitude*10) / 10;
+    if (rounded < 0){
+        rounded = 0.0;
+    }
+
+    // Injects the rounded drone altitude into canvas element.
+    document.getElementById("drone altitude").innerHTML = "Drone Altitude: " + rounded + "%";
     // animates canvas
     window.requestAnimationFrame(gameLoop);
 
 }
+
+
