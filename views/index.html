@@ -131,30 +131,26 @@
             <button type="button" onclick="changeMap()">Change Map</button>
           </div>
           <div class="dropdown">
-            <button
-              class="btn btn-primary dropdown-toggle"
-              type="button"
-              data-toggle="dropdown"
-            >
-              More Stuff? <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-              <li><a href="#">blahh</a></li>
-              <li><a href="#">blahh</a></li>
-              <li><a href="#">ahhhhh</a></li>
-            </ul>
+            <!--<button-->
+              <!--class="btn btn-primary dropdown-toggle"-->
+              <!--type="button"-->
+              <!--data-toggle="dropdown"-->
+            <!--&gt;-->
+              <!--More Stuff? <span class="caret"></span>-->
+            <!--</button>-->
+            <!--<ul class="dropdown-menu">-->
+                <!--<li><button type = "button" id="graph">View Graph</button></li>-->
+            <!--</ul>-->
+              <button type = "button" onclick="graph()">View Graph</button>
+              <button type = "button" onclick="clearGraph()">Clear Graph</button>
           </div>
           <div>
-            <p>.</p>
-            <p>...</p><!--I know this is a god awful way to do this... just trying to fill random white space for monday demo-->
-            <p>...</p>
-            <p>...</p>
+            <p><button type="button" onclick="snapShot()">Snapshot</button></p>
+            <p id = "altitude"></p><!--I know this is a god awful way to do this... just trying to fill random white space for monday demo-->
+            <p id = "viewable area"></p>
+              <p id = "graph"></p>
             <button>Use Pageup & PageDown to control altitude</button>
             <button>Use arrow keys to move around the map</button>
-            <p>...</p>
-            <p>...</p>
-            <p>...</p>
-            <p>.</p>
             <br/>
         </div>
       </div>

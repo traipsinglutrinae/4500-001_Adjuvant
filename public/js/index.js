@@ -49,13 +49,14 @@ class SatMap {
 
   render() {
     const ctx = this.canvas.getContext("2d");
-
+    let srcLeft = 0;
+    let srcTop = 0;
     const img = new Image(); // Image constructor
     img.onload = () => {
       const srcRight = img.width * (100 - this.zoomLevel) * 0.01;
       const srcBottom = img.height * (100 - this.zoomLevel) * 0.01;
-      const srcLeft = img.width * this.xPercent * 0.01;
-      const srcTop = img.height * this.yPercent * 0.01;
+      srcLeft = img.width * this.xPercent * 0.01;
+      srcTop = img.height * this.yPercent * 0.01;
 
       console.log(srcLeft, srcTop, srcRight, srcBottom, this);
 
@@ -75,6 +76,10 @@ class SatMap {
       // ctx.drawImage(img, 600, 450, 800, 600);
     };
     img.src = "img/1.jpg";
+    // document.getElementById("x value").innerHTML = "X value: " + this.xPercent;
+    // document.getElementById("y value").innerHTML = "Y value: " + this.yPercent;
+    // let viewable = srcLeft * srcTop;
+    // document.getElementById("viewable area").innerHTML = "Viewable Area: " + viewable;
   }
 }
 

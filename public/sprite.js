@@ -64,7 +64,8 @@ function drawFrame(frameX, frameY, canvasX, canvasY) {
 // captures keypress events, could probably do this another way, but I took this from an online source so I just left
 // it unchanged.
 let charCode;
-let altitude = 100;
+let altitude = 1300;
+let viewable = altitude * altitude;
 
 window.addEventListener('keydown', keyDownListener);
 function keyDownListener(event) {
@@ -94,9 +95,10 @@ function gameLoop() {
         // maximum height set to y = 0.
         if (positionY >= 0) {
             positionY -= MOVEMENT_SPEED;
-            if(altitude < 100) {
-                altitude += 0.47;
+            if(altitude < 1300) {
+                altitude += 7;
             }
+            viewable = altitude * altitude;
             if (leftX > 65) {
                 leftX -= 0.30;
                 rightX += 0.30;
@@ -112,8 +114,9 @@ function gameLoop() {
         if (positionY <= 300) {
             positionY += MOVEMENT_SPEED;
             if (altitude > 0) {
-                altitude -= .47;
+                altitude -= 7;
             }
+            viewable = altitude * altitude;
             if (rightX <= 300){
                 if (leftX < 140) {
                     leftX += 0.30;
@@ -141,10 +144,35 @@ function gameLoop() {
     }
 
     // Injects the rounded drone altitude into canvas element.
-    document.getElementById("drone altitude").innerHTML = "Drone Altitude: " + rounded + "%";
+    document.getElementById("drone altitude").innerHTML = "Drone Altitude: " + rounded + " miles";
+    document.getElementById("altitude").innerHTML = "Drone Altitude: " + rounded + " miles";
+    document.getElementById("viewable area").innerHTML = "Viewable Area: " + viewable + "Sq. miles";
     // animates canvas
     window.requestAnimationFrame(gameLoop);
 
+}
+
+let graphData = [];
+let n = 0;
+
+function snapShot(){
+    graphData.push(altitude);
+    graphData.push(viewable);
+}
+
+function graph() {
+    let n = 0;
+    let HTML = "<table border=1 width=100% bgcolor='#343a40'><tr><th>Altitude</th><th>Viewable Area(Sq Miles)</th></tr>";
+    while(n < 6) {
+        HTML += "<tr><td align=center>" + graphData[n] + "</td><td align=center>" + graphData[n + 1] + "</td>";
+        n += 2;
+    }
+    document.getElementById("graph").innerHTML = HTML;
+}
+
+function clearGraph() {
+    graphData = [];
+    document.getElementById("graph").innerHTML = "<p></p>"
 }
 
 

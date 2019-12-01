@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="cefb3ca1-7605-46a2-9b89-2167b31dc8ae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/sprite.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/sprite.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,8 +18,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3174">
-              <caret line="138" column="49" selection-start-line="138" selection-start-column="49" selection-end-line="138" selection-end-column="49" />
+            <state relative-caret-position="131">
+              <caret line="144" column="81" selection-start-line="144" selection-start-column="81" selection-end-line="144" selection-end-column="81" />
             </state>
           </provider>
         </entry>
@@ -25,8 +27,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-927">
-              <caret line="65" column="16" selection-start-line="65" selection-start-column="16" selection-end-line="65" selection-end-column="16" />
+            <state relative-caret-position="1189">
+              <caret line="78" column="4" selection-start-line="78" selection-start-column="7" selection-end-line="81" selection-end-column="89" />
             </state>
           </provider>
         </entry>
@@ -34,8 +36,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/sprite.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="62">
-              <caret line="102" column="40" selection-start-line="102" selection-start-column="40" selection-end-line="102" selection-end-column="40" />
+            <state relative-caret-position="177">
+              <caret line="164" column="52" selection-start-line="164" selection-start-column="52" selection-end-line="164" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -68,6 +70,7 @@
       <list>
         <option value="$PROJECT_DIR$/src/DroneView.html" />
         <option value="$PROJECT_DIR$/public/foo.css" />
+        <option value="$PROJECT_DIR$/public/js/index.js" />
         <option value="$PROJECT_DIR$/views/index.html" />
         <option value="$PROJECT_DIR$/public/sprite.js" />
       </list>
@@ -135,7 +138,7 @@
       <workItem from="1574298624591" duration="437000" />
       <workItem from="1574299767421" duration="3037000" />
       <workItem from="1574732100164" duration="1952000" />
-      <workItem from="1575140135045" duration="1673000" />
+      <workItem from="1575140135045" duration="12972000" />
     </task>
     <task id="LOCAL-00001" summary="Drone animation">
       <created>1572912652775</created>
@@ -193,11 +196,25 @@
       <option name="project" value="LOCAL" />
       <updated>1574301902933</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Adjusted Drone Sprite Starting position and size of cone and square.">
+      <created>1575141961611</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1575141961611</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Synchronized button presses between drone and map image. Added drone altitude to canvas output.">
+      <created>1575144979577</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1575144979578</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39938000" />
+    <option name="totallyTimeSpent" value="51237000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -244,7 +261,9 @@
     <MESSAGE value="Added square on iso map." />
     <MESSAGE value="Changed drone max and min height." />
     <MESSAGE value="Restored Drone Sprite to original specification." />
-    <option name="LAST_COMMIT_MESSAGE" value="Restored Drone Sprite to original specification." />
+    <MESSAGE value="Adjusted Drone Sprite Starting position and size of cone and square." />
+    <MESSAGE value="Synchronized button presses between drone and map image. Added drone altitude to canvas output." />
+    <option name="LAST_COMMIT_MESSAGE" value="Synchronized button presses between drone and map image. Added drone altitude to canvas output." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/DroneView.html">
@@ -264,13 +283,6 @@
     <entry file="file://$PROJECT_DIR$/src/test.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3174">
-          <caret line="138" column="49" selection-start-line="138" selection-start-column="49" selection-end-line="138" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/foo.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="230">
@@ -280,15 +292,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-927">
-          <caret line="65" column="16" selection-start-line="65" selection-start-column="16" selection-end-line="65" selection-end-column="16" />
+        <state relative-caret-position="1189">
+          <caret line="78" column="4" selection-start-line="78" selection-start-column="7" selection-end-line="81" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="144" column="81" selection-start-line="144" selection-start-column="81" selection-end-line="144" selection-end-column="81" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/sprite.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="62">
-          <caret line="102" column="40" selection-start-line="102" selection-start-column="40" selection-end-line="102" selection-end-column="40" />
+        <state relative-caret-position="177">
+          <caret line="164" column="52" selection-start-line="164" selection-start-column="52" selection-end-line="164" selection-end-column="52" />
         </state>
       </provider>
     </entry>
