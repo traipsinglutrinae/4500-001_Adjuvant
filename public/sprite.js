@@ -153,7 +153,6 @@ function gameLoop() {
 }
 
 let graphData = [];
-let n = 0;
 
 function snapShot(){
     graphData.push(altitude);
@@ -162,7 +161,7 @@ function snapShot(){
 
 function graph() {
     let n = 0;
-    let HTML = "<table border=1 width=100% bgcolor='#343a40'><tr><th>Altitude</th><th>Viewable Area(Sq Miles)</th></tr>";
+    let HTML = "<table border=1 width=100% bgcolor='red' style='color: brown'><tr><th>Altitude</th><th>Viewable Area(Sq Miles)</th></tr>";
     while(n < 6) {
         HTML += "<tr><td align=center>" + graphData[n] + "</td><td align=center>" + graphData[n + 1] + "</td>";
         n += 2;

@@ -8,3 +8,7 @@ canvas{
     background-color: black;
 }
 
+#graph{
+    background-color: red;!important;
+    text-decoration-color: red;
+}
