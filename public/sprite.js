@@ -27,10 +27,12 @@ const SCALED_WIDTH = SCALE * WIDTH;
 const SCALED_HEIGHT = SCALE * HEIGHT;
 
 // holds position for left and right endpoints of indicator cone.
-let leftX = 125;
-let rightX = 175;
-let radius = 25;
-let squareY = 415;
+// let leftX = 125;
+// let rightX = 175;
+let leftX = 65;
+let rightX = 255;
+let radius = 95;
+let squareY = 370;
 
 
 // draws all canvas elements: drone, indicator line, iso map
@@ -61,48 +63,60 @@ function drawFrame(frameX, frameY, canvasX, canvasY) {
 
 // captures keypress events, could probably do this another way, but I took this from an online source so I just left
 // it unchanged.
-let keyPresses = {};
+let charCode;
+let altitude = 1300;
+let viewable = altitude * altitude;
 
 window.addEventListener('keydown', keyDownListener);
 function keyDownListener(event) {
-    keyPresses[event.key] = true;
+    // Sets code of pressed key to charCode: 189 == Minus and 187 == Equal.
+    charCode = typeof event.which == "number" ? event.which : event.keyCode;
 }
 
 window.addEventListener('keyup', keyUpListener);
 function keyUpListener(event) {
-    keyPresses[event.key] = false;
+    // Sets charCode to zero once key is no longer pressed.
+    charCode = 0;
 }
 
 // sets starting position for drone sprite and movement speed.
 
 const MOVEMENT_SPEED = 1.25;
-let positionX = 132;
-let positionY = 225;
+let positionX = 140;
+let positionY = 0;
 
 
 function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     //captures up and down movement.
-    if (keyPresses.PageUp) {
+    if (charCode == 189) {
         // If drone has not reached maximum height, update position.
-
         // maximum height set to y = 0.
         if (positionY >= 0) {
             positionY -= MOVEMENT_SPEED;
+            if(altitude < 1300) {
+                altitude += 7;
+            }
+            viewable = altitude * altitude;
             if (leftX > 65) {
                 leftX -= 0.30;
                 rightX += 0.30;
                 radius += 0.30;
                 squareY -= 0.30;
             }
+
         }
-    } else if (keyPresses.PageDown) {
+    } else if (charCode == 187) {
         // If drone has not reached minimum height, update position.
         // minimum height set to y = 270.
 
         if (positionY <= 300) {
             positionY += MOVEMENT_SPEED;
+            if (altitude > 0) {
+                altitude -= 7;
+            }
+            viewable = altitude * altitude;
             if (rightX <= 300){
                 if (leftX < 140) {
                     leftX += 0.30;
@@ -123,9 +137,41 @@ function gameLoop() {
     }
     drawFrame(0, 0, positionX, positionY);
 
+    // Rounds the altitude value 1 decimal place.
+    let rounded = Math.round(altitude*10) / 10;
+    if (rounded < 0){
+        rounded = 0.0;
+    }
 
-
+    // Injects the rounded drone altitude into canvas element.
+    document.getElementById("drone altitude").innerHTML = "Drone Altitude: " + rounded + " miles";
+    document.getElementById("altitude").innerHTML = "Drone Altitude: " + rounded + " miles";
+    document.getElementById("viewable area").innerHTML = "Viewable Area: " + viewable + "Sq. miles";
     // animates canvas
     window.requestAnimationFrame(gameLoop);
 
 }
+
+let graphData = [];
+
+function snapShot(){
+    graphData.push(altitude);
+    graphData.push(viewable);
+}
+
+function graph() {
+    let n = 0;
+    let HTML = "<table border=1 width=100% bgcolor='red' style='color: brown'><tr><th>Altitude</th><th>Viewable Area(Sq Miles)</th></tr>";
+    while(n < 6) {
+        HTML += "<tr><td align=center>" + graphData[n] + "</td><td align=center>" + graphData[n + 1] + "</td>";
+        n += 2;
+    }
+    document.getElementById("graph").innerHTML = HTML;
+}
+
+function clearGraph() {
+    graphData = [];
+    document.getElementById("graph").innerHTML = "<p></p>"
+}
+
+
