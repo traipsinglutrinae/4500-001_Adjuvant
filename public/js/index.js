@@ -168,10 +168,7 @@ class SatMap {
       }
     };
     img.src = "img/1.jpg";
-    // document.getElementById("x value").innerHTML = "X value: " + this.xPercent;
-    // document.getElementById("y value").innerHTML = "Y value: " + this.yPercent;
-    // let viewable = srcLeft * srcTop;
-    // document.getElementById("viewable area").innerHTML = "Viewable Area: " + viewable;
+
   }
 }
 
@@ -210,6 +207,7 @@ window.onload = function() {
   map.canvas = canvas;
   map.render();
 };
+
 
 document.onkeypress = function(e) {
   e = e || window.event;

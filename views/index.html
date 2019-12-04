@@ -118,7 +118,7 @@
       <div class="row content">
         <div id="drone sprite" class="col-sm-3 sidenav" width="300" height="540">
           <p id="drone altitude"></p>
-          <canvas width="300" height="540">
+          <canvas id="spriteCanvas" width="300" height="540">
           </canvas>
           <script rel="script" src="sprite.js"></script>
         </div>
@@ -129,7 +129,7 @@
         </div>
         <div id="infoOut" class="infoOut col-sm-1 sidenav" style="background-color:#333;">
           <div id="mapChanger">
-            <button type="button" onclick="changeMap()">Change Map</button>
+            <button type="button" onclick="changeMiniMap(); changeMap();">Change Map</button>
           </div>
           <div class="dropdown">
             <!--<button-->

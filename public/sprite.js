@@ -4,7 +4,50 @@ let img = new Image();
 
 // image source for isometric map.
 
-img.src = "img/landscape.png";
+img.src = "img/mp1.png";
+
+let altitude = 1300;
+let zoomAltitude = 1300;
+let width = 1013;
+let height = 1313;
+let zoomPercent = zoomAltitude/altitude;
+let viewable = (width * zoomPercent) * (height * zoomPercent);
+
+function changeMiniMap(){
+    currentMap = ++currentMap > 5 ? 1 : currentMap;
+
+    switch (currentMap) {
+        case 1:
+            img.src = "img/mp1.png";
+            width = 1013;
+            height = 1313;
+            break;
+        case 2:
+            img.src = "img/mp2.png";
+            width = 118;
+            height = 118;
+            break;
+        case 3:
+            img.src = "img/mp3.png";
+            width = 1.25;
+            height = 1.27;
+            break;
+        case 4:
+            img.src = "img/mp4.png";
+            width = 15;
+            height = 9.25;
+            break;
+        case 5:
+            img.src = "img/mp5.png";
+            width = 1.25;
+            height = 1.3;
+            break;
+        default:
+            img.src = "img/mp1.png";
+            width = 1013;
+            height = 1313;
+    }
+}
 
 // upload sprite image for drone animation
 drone.src = "img/Drone_sprite.png";
@@ -12,12 +55,14 @@ drone.src = "img/Drone_sprite.png";
 drone.height = 15;
 drone.width = 34;
 drone.onload = function() {
+    canvas = document.querySelector('canvas');
+    ctx = canvas.getContext('2d');
     window.requestAnimationFrame(gameLoop);
 };
 
-
 let canvas = document.querySelector('canvas');
 let ctx = canvas.getContext('2d');
+
 
 // scales drone image, can adjust if we need
 const SCALE = 1;
@@ -27,8 +72,6 @@ const SCALED_WIDTH = SCALE * WIDTH;
 const SCALED_HEIGHT = SCALE * HEIGHT;
 
 // holds position for left and right endpoints of indicator cone.
-// let leftX = 125;
-// let rightX = 175;
 let leftX = 65;
 let rightX = 255;
 let radius = 95;
@@ -54,7 +97,6 @@ function drawFrame(frameX, frameY, canvasX, canvasY) {
     ctx.beginPath();
     ctx.fillStyle = "rgba(192,192,192,0.5)";
     ctx.rect(leftX, squareY, radius*2, radius*2);
-    // ctx.arc(150, 893/2, radius, 0, 2 * Math.PI);
     ctx.fill();
 
 
@@ -64,8 +106,6 @@ function drawFrame(frameX, frameY, canvasX, canvasY) {
 // captures keypress events, could probably do this another way, but I took this from an online source so I just left
 // it unchanged.
 let charCode;
-let altitude = 1300;
-let viewable = altitude * altitude;
 
 window.addEventListener('keydown', keyDownListener);
 function keyDownListener(event) {
@@ -95,10 +135,11 @@ function gameLoop() {
         // maximum height set to y = 0.
         if (positionY >= 0) {
             positionY -= MOVEMENT_SPEED;
-            if(altitude < 1300) {
-                altitude += 7;
+            if(zoomAltitude < 1300) {
+                zoomAltitude += 7;
+                zoomPercent = zoomAltitude/altitude;
             }
-            viewable = altitude * altitude;
+            viewable = (width * zoomPercent) * (height * zoomPercent);
             if (leftX > 65) {
                 leftX -= 0.30;
                 rightX += 0.30;
@@ -109,14 +150,15 @@ function gameLoop() {
         }
     } else if (charCode == 187) {
         // If drone has not reached minimum height, update position.
-        // minimum height set to y = 270.
+        // minimum height set to y = 300.
 
         if (positionY <= 300) {
             positionY += MOVEMENT_SPEED;
-            if (altitude > 0) {
-                altitude -= 7;
+            if (zoomAltitude > 0) {
+                zoomAltitude -= 7;
+                zoomPercent = zoomAltitude/altitude;
             }
-            viewable = altitude * altitude;
+            viewable = (width * zoomPercent) * (height * zoomPercent);
             if (rightX <= 300){
                 if (leftX < 140) {
                     leftX += 0.30;
@@ -137,8 +179,8 @@ function gameLoop() {
     }
     drawFrame(0, 0, positionX, positionY);
 
-    // Rounds the altitude value 1 decimal place.
-    let rounded = Math.round(altitude*10) / 10;
+    // Rounds the altitude value to 1 decimal place.
+    let rounded = Math.round(zoomAltitude*10) / 10;
     if (rounded < 0){
         rounded = 0.0;
     }
@@ -146,7 +188,13 @@ function gameLoop() {
     // Injects the rounded drone altitude into canvas element.
     document.getElementById("drone altitude").innerHTML = "Drone Altitude: " + rounded + " miles";
     document.getElementById("altitude").innerHTML = "Drone Altitude: " + rounded + " miles";
-    document.getElementById("viewable area").innerHTML = "Viewable Area: " + viewable + "Sq. miles";
+
+    rounded = Math.round(viewable*10) / 10;
+    if (rounded < 0){
+        rounded = 0.0;
+    }
+
+    document.getElementById("viewable area").innerHTML = "Viewable Area: " + rounded + "Sq. miles";
     // animates canvas
     window.requestAnimationFrame(gameLoop);
 
@@ -155,7 +203,7 @@ function gameLoop() {
 let graphData = [];
 
 function snapShot(){
-    graphData.push(altitude);
+    graphData.push(zoomAltitude);
     graphData.push(viewable);
 }
 
