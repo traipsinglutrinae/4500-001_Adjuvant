@@ -27,7 +27,7 @@ const waldoConfig = [
 ];
 
 class SatMap {
-  constructor(canvas, waldoInfo) {
+  constructor(canvas, img, waldoInfo) {
     this.canvas = canvas || undefined;
     this.zoomLevel = 0;
     this.xCenter = 0;
@@ -35,6 +35,7 @@ class SatMap {
     this.stepScale = 10;
     this.ctx = undefined;
     this.waldo = waldoInfo;
+    this.img = img;
   }
 
   get width() {
@@ -145,7 +146,6 @@ class SatMap {
       );
 
       if (this.zoomLevel > 80 || 1) {
-        console.log("asdf");
         const waldo = new Image();
         waldo.onload = () => {
           //draw waldo
@@ -158,17 +158,11 @@ class SatMap {
             25, //this.zoomLevel - 75,
             25 //this.zoomLevel - 75
           );
-          console.log(
-            (this.waldo.x - this.xCenter - srcLeft + this.spareWidth / 2) *
-              (1 / windowScale.width),
-            srcLeft
-          );
         };
         waldo.src = this.waldo.src;
       }
     };
-    img.src = "img/1.jpg";
-
+    img.src = this.img;
   }
 }
 
@@ -177,26 +171,29 @@ function changeMap() {
 
   switch (currentMap) {
     case 1:
-      injectMap("img/1.jpg");
+      map.img = "img/1.jpg";
       break;
     case 2:
-      injectMap("img/2.jpg");
+      map.img = "img/2.jpg";
       break;
     case 3:
-      injectMap("img/3.jpg");
+      map.img = "img/3.jpg";
       break;
     case 4:
-      injectMap("img/4.jpg");
+      map.img = "img/4.jpg";
       break;
     case 5:
-      injectMap("img/5.jpg");
+      map.img = "img/5.jpg";
       break;
     default:
-      injectMap("img/1.jpg");
+      map.img = "img/1.jpg";
   }
+
+  map.render();
+  changeMiniMap();
 }
 
-const map = new SatMap(undefined, waldoConfig[1]);
+const map = new SatMap(undefined, "img/1.jpg", waldoConfig[1]);
 
 document.addEventListener("DOMContentLoaded", event => {
   // injectMap("img/1.jpg");
@@ -207,7 +204,6 @@ window.onload = function() {
   map.canvas = canvas;
   map.render();
 };
-
 
 document.onkeypress = function(e) {
   e = e || window.event;
