@@ -21,31 +21,37 @@ function changeMiniMap(){
             img.src = "img/mp1.png";
             width = 1013;
             height = 1313;
+            viewable = (width * zoomPercent) * (height * zoomPercent);
             break;
         case 2:
             img.src = "img/mp2.png";
             width = 118;
             height = 118;
+            viewable = (width * zoomPercent) * (height * zoomPercent);
             break;
         case 3:
             img.src = "img/mp3.png";
             width = 1.25;
-            height = 1.27;
+            height = 1.27
+            viewable = (width * zoomPercent) * (height * zoomPercent);;
             break;
         case 4:
             img.src = "img/mp4.png";
             width = 15;
             height = 9.25;
+            viewable = (width * zoomPercent) * (height * zoomPercent);
             break;
         case 5:
             img.src = "img/mp5.png";
             width = 1.25;
             height = 1.3;
+            viewable = (width * zoomPercent) * (height * zoomPercent);
             break;
         default:
             img.src = "img/mp1.png";
             width = 1013;
             height = 1313;
+            viewable = (width * zoomPercent) * (height * zoomPercent);
     }
 }
 
