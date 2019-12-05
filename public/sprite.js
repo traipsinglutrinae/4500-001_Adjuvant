@@ -9,6 +9,7 @@ let altitude = 1300;
 let zoomAltitude = 1300;
 let width = 1013;
 let height = 1313;
+
 let zoomPercent = zoomAltitude / altitude;
 let viewable = width * zoomPercent * (height * zoomPercent);
 
@@ -44,6 +45,7 @@ function changeMiniMap() {
       width = 1013;
       height = 1313;
   }
+
 }
 
 // upload sprite image for drone animation
