@@ -1,3 +1,14 @@
 p {
     color: red
 }
+
+canvas{
+    border: 2px;
+    border: black;
+    background-color: black;
+}
+
+#graph{
+    background-color: red;!important;
+    text-decoration-color: red;
+}
