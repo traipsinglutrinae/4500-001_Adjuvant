@@ -63,3 +63,5 @@ typings/
 # compiled
 dist
 server.js
+
+/.idea
