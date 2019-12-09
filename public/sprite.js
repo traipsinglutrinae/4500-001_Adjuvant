@@ -45,7 +45,6 @@ function changeMiniMap() {
       width = 1013;
       height = 1313;
   }
-
 }
 
 // upload sprite image for drone animation
@@ -134,46 +133,39 @@ function gameLoop() {
     // If drone has not reached maximum height, update position.
     // maximum height set to y = 0.
     if (positionY >= 0) {
-      positionY -= MOVEMENT_SPEED;
       if (zoomAltitude < 1300) {
         zoomAltitude += 7;
         zoomPercent = zoomAltitude / altitude;
       }
+      positionY = 300 - Math.round(zoomPercent * 300);
       viewable = width * zoomPercent * (height * zoomPercent);
-      if (leftX > 65) {
-        leftX -= 0.3;
-        rightX += 0.3;
-        radius += 0.3;
-        squareY -= 0.3;
-      }
+      leftX = 65 + 75 * (1 - zoomPercent);
+      rightX = 255 - 95 * (1 - zoomPercent);
+      radius = 95 - 85 * (1 - zoomPercent);
+      squareY = 370 + 70 * (1 - zoomPercent);
     }
+
+    map.zoomTo((1 - zoomPercent) * 100);
   } else if (charCode == 187) {
     // If drone has not reached minimum height, update position.
     // minimum height set to y = 300.
 
     if (positionY <= 300) {
-      positionY += MOVEMENT_SPEED;
       if (zoomAltitude > 0) {
         zoomAltitude -= 7;
         zoomPercent = zoomAltitude / altitude;
       }
+      positionY = 300 - Math.round(zoomPercent * 300);
       viewable = width * zoomPercent * (height * zoomPercent);
-      if (rightX <= 300) {
-        if (leftX < 140) {
-          leftX += 0.3;
-        }
-        if (rightX > 160) {
-          rightX -= 0.3;
-        }
-        if (radius > 10) {
-          radius -= 0.3;
-        }
-        if (squareY < 440) {
-          squareY += 0.3;
-        }
-      }
+      leftX = 65 + 75 * (1 - zoomPercent);
+      rightX = 255 - 95 * (1 - zoomPercent);
+      radius = 95 - 85 * (1 - zoomPercent);
+      squareY = 370 + 70 * (1 - zoomPercent);
     }
+
+    map.zoomTo((1 - zoomPercent) * 100);
   }
+
   drawFrame(0, 0, positionX, positionY);
 
   // Rounds the altitude value to 1 decimal place.
@@ -204,8 +196,7 @@ let snaps = 0;
 function snapShot() {
   if (zoomAltitude < 0) {
     graphData.push(0);
-  }
-  else {
+  } else {
     graphData.push(zoomAltitude);
   }
   graphData.push(viewable);
@@ -216,7 +207,7 @@ function graph() {
   let n = 0;
   let HTML =
     "<table border=1 width=100% bgcolor='red' style='color: brown'><tr><th>Altitude</th><th>Viewable Area(Sq Miles)</th></tr>";
-  while (n < (snaps + 2)) {
+  while (n < snaps + 2) {
     HTML +=
       "<tr><td align=center>" +
       graphData[n] +
@@ -235,67 +226,84 @@ function clearGraph() {
 }
 
 function drawGraph() {
-    var x = document.getElementById("graphDiv");
-    if (x.style.display === "none") {
-      x.style.display = "block";
-    } else {
-      x.style.display = "none";
-    }
+  var x = document.getElementById("graphDiv");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
 }
 
 function makeGraph() {
-  var gtx = document.getElementById('myGraph');
+  var gtx = document.getElementById("myGraph");
   var scatterChart = new Chart(gtx, {
-      type: 'line',
-      data: {
-          datasets: [{
-              title:{
-                text: "Graph of Snapshots: [X:Drone Altitude (miles)] [Y:Viewable Surface Area (square miles)]"
-              },
-              label: 'Snapshot',
-              data: [{
-                  x: graphData[0],
-                  y: graphData[1]
-              }, {
-                  x: graphData[2],
-                  y: graphData[3]
-              }, {
-                  x: graphData[4],
-                  y: graphData[5]
-              }, {
-                  x: graphData[6],
-                  y: graphData[7]
-              }, {
-                  x: graphData[8],
-                  y: graphData[9]
-              }, {
-                  x: graphData[10],
-                  y: graphData[11]
-              }, {
-                  x: graphData[12],
-                  y: graphData[13]
-              }, {
-                  x: graphData[14],
-                  y: graphData[15]
-              }, {
-                  x: graphData[16],
-                  y: graphData[17]
-              }, {
-                  x: graphData[18],
-                  y: graphData[19]
-              }, {
-                  x: graphData[20],
-                  y: graphData[21]
-              }]
-          }]
-      },
-      options: {
-          scales: {
-              xAxes: [{
-                  type: 'linear',
-                  position: 'bottom'
-              }]
+    type: "line",
+    data: {
+      datasets: [
+        {
+          title: {
+            text:
+              "Graph of Snapshots: [X:Drone Altitude (miles)] [Y:Viewable Surface Area (square miles)]"
+          },
+          label: "Snapshot",
+          data: [
+            {
+              x: graphData[0],
+              y: graphData[1]
+            },
+            {
+              x: graphData[2],
+              y: graphData[3]
+            },
+            {
+              x: graphData[4],
+              y: graphData[5]
+            },
+            {
+              x: graphData[6],
+              y: graphData[7]
+            },
+            {
+              x: graphData[8],
+              y: graphData[9]
+            },
+            {
+              x: graphData[10],
+              y: graphData[11]
+            },
+            {
+              x: graphData[12],
+              y: graphData[13]
+            },
+            {
+              x: graphData[14],
+              y: graphData[15]
+            },
+            {
+              x: graphData[16],
+              y: graphData[17]
+            },
+            {
+              x: graphData[18],
+              y: graphData[19]
+            },
+            {
+              x: graphData[20],
+              y: graphData[21]
+            }
+          ]
+        }
+      ]
+    },
+    options: {
+      scales: {
+        xAxes: [
+          {
+            type: "linear",
+            position: "bottom"
           }
+        ]
       }
-  })
+    }
+  });
 }

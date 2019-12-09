@@ -64,7 +64,7 @@ class SatMap {
       this.zoomLevel = 0;
     }
 
-    this.render;
+    this.render();
   }
 
   moveRight() {
@@ -145,7 +145,7 @@ class SatMap {
         this.canvas.height
       );
 
-      if (this.zoomLevel > 80 || 1) {
+      if (this.zoomLevel > 80) {
         const waldo = new Image();
         waldo.onload = () => {
           //draw waldo
@@ -155,8 +155,8 @@ class SatMap {
               (1 / windowScale.width),
             (this.waldo.y - srcTop + this.spareHeight / 2) *
               (1 / windowScale.height),
-            25, //this.zoomLevel - 75,
-            25 //this.zoomLevel - 75
+            this.zoomLevel - 70,
+            this.zoomLevel - 70
           );
         };
         waldo.src = this.waldo.src;
@@ -195,10 +195,6 @@ function changeMap() {
 
 const map = new SatMap(undefined, "img/1.jpg", waldoConfig[1]);
 
-document.addEventListener("DOMContentLoaded", event => {
-  // injectMap("img/1.jpg");
-});
-
 window.onload = function() {
   const canvas = document.getElementById("myCanvas");
   map.canvas = canvas;
@@ -209,12 +205,6 @@ document.onkeypress = function(e) {
   e = e || window.event;
   var charCode = typeof e.which == "number" ? e.which : e.keyCode;
   switch (charCode) {
-    case 61:
-      map.zoomIn();
-      break;
-    case 45:
-      map.zoomOut();
-      break;
     case 100:
       map.moveRight();
       break;
@@ -228,7 +218,6 @@ document.onkeypress = function(e) {
       map.moveDown();
       break;
     default:
-      console.log(charCode);
   }
 };
 
