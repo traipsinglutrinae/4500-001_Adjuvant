@@ -206,10 +206,10 @@ document.onkeypress = function(e) {
   var charCode = typeof e.which == "number" ? e.which : e.keyCode;
   switch (charCode) {
     case 100:
-      map.moveRight();
+      map.moveLeft();
       break;
     case 97:
-      map.moveLeft();
+      map.moveRight();
       break;
     case 119:
       map.moveUp();
